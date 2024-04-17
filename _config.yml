@@ -87,11 +87,9 @@ last_edit_time_format: "%b %e %Y at %I:%M %p" # uses ruby's time format: https:/
 # External navigation links
 nav_external_links:
   - title: Github
-    url: https://github.com/crivmar
+    url: https://github.com/iagolb
     hide_icon: false # set to true to hide the external link icon - defaults to false
-  - title: Twitter
-    url: https://twitter.com/crivmar88
-    hide_icon: false 
+  
 
 # Color scheme currently only supports "dark", "light"/nil (default), or a custom scheme that you define
 color_scheme: dark
