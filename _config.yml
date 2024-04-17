@@ -78,7 +78,7 @@ heading_anchors: true
 back_to_top: true
 back_to_top_text: "Ir a arriba"
 
-footer_content: "Crivmar &copy; 2022. Distribuido bajo <a href=\"https://github.com/just-the-docs/just-the-docs/tree/main/LICENSE.txt\">licencia MIT.</a>"
+footer_content: "IagoLB &copy; 2024. Distribuido bajo <a href=\"https://github.com/just-the-docs/just-the-docs/tree/main/LICENSE.txt\">licencia MIT.</a>"
 
 # Footer last edited timestamp
 last_edit_timestamp: true # show or hide edit time - page must have `last_modified_date` defined in the frontmatter
