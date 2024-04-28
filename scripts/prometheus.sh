@@ -17,8 +17,17 @@ echo "Descargando versión 2.51.1 de prometheus"
 if [ ! $(systemctl is-active --quiet prometheus) ]; then
 	cd /tmp
 	wget https://github.com/prometheus/prometheus/releases/download/v2.51.1/prometheus-2.51.1.linux-amd64.tar.gz
-	tar -xf prometheus-2.51.1.linux-amd64.tar.gz 	
-	read -p "Presiona intro para continuar"
+ 	hash_node_prometheus_2_51_1=1f933ea7515e3a6e60374ee0bfdb62bc4701c7b12c1dbafe1865c327c6e0e7d2
+  	hash_actual=$(sha256sum prometheus-2.51.1.linux-amd64.tar.gz | awk -F " " '{print $1}' )
+
+	if [ $hash_node_prometheus_2_51_1 == $hash_actual ];then
+    		tar -xf prometheus-2.51.1.linux-amd64.tar.gz 	
+		read -p "Presiona intro para continuar"
+  	else
+		rm prometheus-2.51.1.linux-amd64.tar.gz
+  		exit 1
+   	fi
+	
 else
 	echo "Ya está instalado"
 fi
