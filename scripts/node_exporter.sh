@@ -13,15 +13,19 @@ if [ ! id -u node_exporter > /dev/null 2>&1 ];then
 	read -p "Presiona intro para continuar"
 fi
 
-hash_node_exporter_service_1_7_0=893dfb5a459feb6416d84b332b6691cc0ff01f307a37487375df369b660590b7
-hash_actual=$(sha256sum /etc/systemd/system/node_exporter.service | awk -F " " '{print $1}' )
-if [ $hash_node_exporter_service_1_7_0 != $hash_actual ];then
-    cd /tmp
-    curl -LO https://github.com/prometheus/node_exporter/releases/download/v1.7.0/node_exporter-1.7.0.linux-amd64.tar.gz
+curl -LO https://github.com/prometheus/node_exporter/releases/download/v1.7.0/node_exporter-1.7.0.linux-amd64.tar.gz
+hash_node_exporter_1_7_0=893dfb5a459feb6416d84b332b6691cc0ff01f307a37487375df369b660590b7
+hash_actual=$(sha256sum node_exporter-1.7.0.linux-amd64.tar.gz | awk -F " " '{print $1}' )
+
+if [ $hash_node_exporter_1_7_0 == $hash_actual ];then
+    cd /tmp    
     tar xvf node_exporter-1.7.0.linux-amd64.tar.gz
     sudo cp node_exporter-1.7.0.linux-amd64/node_exporter /usr/local/bin
     sudo chown node_exporter:node_exporter /usr/local/bin/node_exporter
     rm -rf node_exporter-1.7.0.linux-amd64.tar.gz node_exporter-1.7.0.linux-amd64
+else
+    rm node_exporter-1.7.0.linux-amd64.tar.gz
+    exit 1
 fi
 
 if [ ! -f /etc/systemd/system/node_exporter.service ];then
