@@ -4,7 +4,7 @@ layout: home
 nav_order: 1
 ---
 
-<img src="https://raw.githubusercontent.com/crivmar/crivmar-lynis.github.io/main/assets/images/logo.jpg" width="400" height="400" />
+<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/iconos.jpg" width="657" height="257" />
 
 Esta web ha sido creada para mi [proyecto](https://github.com/IagoLB/iagolb.github.io) final de Administración de Sistemas Informáticos en Red (CFPGS) del Instituo.
 [GitHub Pages]: https://docs.github.com/en/pages
