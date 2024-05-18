@@ -12,7 +12,10 @@ La monitorización de sistemas informáticos, consiste en el proceso de recopila
 
 Existen diferentes herramientas y tecnologías disponibles para la monitorización de sistemas informáticos. Algunas de las más comunes incluyen:
 
-- Agentes de software: Se instalan en los sistemas que se quieren monitorizar y recopilan datos de forma local o los envían a algún endpoint para ser recolectados.
-- Sistemas de monitorización sin agente: Recolectan datos de forma remota, por ejemplo, mediante SNMP o WMI.
-- Herramientas de registro: Analizan los registros del sistema para identificar eventos y problemas.
-- Dashboards: Visualizan los datos de monitorización en una forma fácil de entender.
+- **Agentes de software**: Se instalan en los sistemas que se quieren monitorizar y recopilan datos de forma local o los envían a algún endpoint para ser recolectados.
+
+- **Sistemas de monitorización sin agente**: Recolectan datos de forma remota, por ejemplo, mediante SNMP o WMI.
+
+- **Herramientas de registro:** Analizan los registros del sistema para identificar eventos y problemas.
+
+- **Dashboards**: Visualizan los datos de monitorización en una forma fácil de entender.

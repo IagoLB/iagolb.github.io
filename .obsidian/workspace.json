@@ -161,12 +161,17 @@
   },
   "active": "0f57c627875445d0",
   "lastOpenFiles": [
-    "docs/Introducción/index.md",
     "docs/Introducción/Comparación con otras herramientas.md",
-    "docs/Introducción/Uso de grafana.md",
-    "docs/Introducción/Software de monitorización.md",
-    "docs/Introducción/Principios de la monitorización.md",
+    "docs/Introducción/index.md",
     "docs/Introducción/Objetivos del proyecto.md",
-    "index.md"
+    "docs/Introducción/Principios de la monitorización.md",
+    "{{.md",
+    "docs/prueba2/index.md",
+    "docs/Introducción/Software de monitorización.md",
+    "index.md",
+    "images/iconos.jpg",
+    "templates/plantilla.md",
+    "README.md",
+    "docs/Introducción/Uso de grafana.md"
   ]
 }
