@@ -1,13 +1,14 @@
 ---
-title: Preparación del servidor de monitorización
+title: Base
 layout: default
-parent: Preparación del escenario
+parent: Preparación del servidor de monitorización
+grand_parent: Preparación del escenario
 nav_order: 1
-has_children: true
+has_children: false
 has_toc: false
 ---
 
-El sistema base utilizado será Debian 12, elegido por su reconocida robustez y estabilidad, características esenciales para un servidor de monitoreo confiable. Este entorno será la base sobre la cual se instalarán varias herramientas para la monitorización: Grafana, InfluxDB y Prometheus.
+Test-El sistema base utilizado será Debian 12, elegido por su reconocida robustez y estabilidad, características esenciales para un servidor de monitoreo confiable. Este entorno será la base sobre la cual se instalarán varias herramientas para la monitorización: Grafana, InfluxDB y Prometheus.
 
 Para garantizar una instalación, configuración y uso adecuados de estas herramientas, también instalaremos los paquetes necesarios. Los paquetes específicos que se requieren son `apt-transport-https`, `software-properties-common` y `wget`.
 
