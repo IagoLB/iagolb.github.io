@@ -7,6 +7,7 @@ title: Titulo
 parent: Nombre
 nav_order: 1
 ---
+
 ```
 
 Plantilla elementos hijos
@@ -18,3 +19,5 @@ title: Titulo
 parent: Nombre elemento padre
 nav_order: 1
 ---
+
+```
