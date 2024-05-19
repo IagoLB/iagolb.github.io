@@ -1,8 +1,8 @@
 ---
 layout: default
 title: Test
-parent: Preparación del servidor de monitorización
-grand_parent: Preparación del escenario
+parent: Preparación del escenario
+grand_parent: Preparación del servidor de monitorización
 nav_order: 1
 ---
 
