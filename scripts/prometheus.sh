@@ -81,7 +81,7 @@ if [ ! -f /etc/prometheus/prometheus.yml ];then
 		scrape_interval: 5s
 		static_configs:
 		- targets: ['localhost:9090']
-	" > etc/prometheus/prometheus.yml
+	" > /etc/prometheus/prometheus.yml
 
 	chown prometheus:prometheus /etc/prometheus/prometheus.yml
 fi
