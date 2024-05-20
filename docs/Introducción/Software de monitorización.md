@@ -4,7 +4,17 @@ title: Software de monitorización
 parent: Introducción
 nav_order: 3
 ---
+# Estructura de navegación
+{: .no_toc }
 
+<details open markdown="block">
+  <summary>
+    Tabla de contenidos
+  </summary>
+  {: .text-delta }
+- TOC
+{:toc}
+</details>
 # Software utilizado en este proyecto
 
 ## Grafana

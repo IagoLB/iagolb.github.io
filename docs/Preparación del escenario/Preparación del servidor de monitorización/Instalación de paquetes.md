@@ -7,7 +7,17 @@ nav_order: 1
 has_children: false
 has_toc: true
 ---
+# Estructura de navegación
+{: .no_toc }
 
+<details open markdown="block">
+  <summary>
+    Tabla de contenidos
+  </summary>
+  {: .text-delta }
+- TOC
+{:toc}
+</details>
 ### Preparando la base
 
 Partiendo de un SO recién instalado lo primero que haremos será actualizar los repositorios y los paquetes que tengamos con el comando:

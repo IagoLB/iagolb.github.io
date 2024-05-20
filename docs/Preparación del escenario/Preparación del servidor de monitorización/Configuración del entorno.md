@@ -7,12 +7,12 @@ nav_order: 2
 has_children: false
 has_toc: false
 ---
-# Navigation Structure
+# Estructura de navegación
 {: .no_toc }
 
 <details open markdown="block">
   <summary>
-    Table of contents
+    Tabla de contenidos
   </summary>
   {: .text-delta }
 - TOC
