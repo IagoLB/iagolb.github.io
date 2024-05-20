@@ -7,7 +7,17 @@ nav_order: 2
 has_children: false
 has_toc: false
 ---
+# Navigation Structure
+{: .no_toc }
 
+<details open markdown="block">
+  <summary>
+    Table of contents
+  </summary>
+  {: .text-delta }
+- TOC
+{:toc}
+</details>
 ### Configuración de los paquetes
 
 Ya hemos instalado todo lo necesario para desplegar el servidor de monitorización, ahora vamos empezar a configurar los servicios y a conectarlos entre si, empezando con 
@@ -54,11 +64,10 @@ scrape_configs:
 
 Es importante para confirmar que no de fallos usar la herramienta `promtool`, la cual viene con Prometheus para checkear diversas configuraciones de Prometheus.
 
-![[images/Pasted image 20240520202819.png]]
+<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/01.png" />
 
 Con esta configuración Prometheus recogerá automaticamente las métricas que se expongan en esas dos direcciones IP en los puertos 9182, hay que recordar siempre recargar el servicio para actualice la configuración y comprobar que el servicio se ejecuto correctamente.
-
-![[images/Pasted image 20240520203331.png]]
+<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/02.png" />
 
 
 ### Influxdb
@@ -66,11 +75,12 @@ Con esta configuración Prometheus recogerá automaticamente las métricas que s
 Influxdb puede configurarse tanto por linea de comandos con `influx` como por vía web en el puerto 8086, la primera configuración será más cómoda por vía web, es por donde lo haremos en este tutorial.
 
 1. Iniciamos el servicio influxdb, ya que en la instalación no lo activamos.
-![[images/Pasted image 20240520203843.png]]
-2. Al acceder desde el navegador en otra máquina nos saldrá esta interfaz la primera vez para su configuración.
- ![[images/Pasted image 20240520204050.png]]
- 3. Nos pedirá la creación de un usuario y su contraseña, así como la creación de una  `organization` y un `bucket`
+<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/03.png" />
+
+2. Al acceder desde el navegador en otra máquina nos saldrá esta interfaz la primera vez para su configuración. 
+ <img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/04.png" />
+ 1. Nos pedirá la creación de un usuario y su contraseña, así como la creación de una  `organization` y un `bucket`
 	 1. Un **bucket** es: Un bucket es una unidad de almacenamiento en InfluxDB que almacena datos de series temporales. Cada bucket tiene un nombre único, una política de retención
 	 2. Una **organization** es: Una organización es un contenedor lógico en InfluxDB que agrupa buckets y usuarios.
 
-![[images/Pasted image 20240520204357.png]]
+<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/05.png" />
