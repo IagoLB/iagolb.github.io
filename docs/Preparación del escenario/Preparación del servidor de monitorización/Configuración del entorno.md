@@ -19,13 +19,13 @@ Prometheus obtiene su objetivo del fichero `Prometheus.yml`, ubicado en la ruta 
 
 ``` yaml
 global: # Esta etiqueta indica que los valores de esta parte se aplicaran a toda la estructura siempre y cuando no haya otra etiqueta que la contradiga
-	scrape_interval: 15s #El tiempo entre intentos de prometheus para obtener metricas
+  scrape_interval: 15s #El tiempo entre intentos de prometheus para obtener metricas
 scrape_configs: 
   - job_name: 'prometheus' #Nombre que se le asignara al proceso de los siguientes targets
-   scrape_interval: 5s #El tiempo entre intentos de prometheus para obtener metricas
-   scrape_timeout: 4s #El tiempo máximo que esperará prometheus antes de considerar que una consulta ha fallado
-   static_configs: #Define una lista de objetivos estáticos
-     - targets: ['localhost:9090'] #El objetivo del que obtendrá métricas será el localhost, y buscará las metricas en el puerto 9090
+  scrape_interval: 5s #El tiempo entre intentos de prometheus para obtener metricas
+  scrape_timeout: 4s #El tiempo máximo que esperará prometheus antes de considerar que una consulta ha fallado
+  static_configs: #Define una lista de objetivos estáticos
+    - targets: ['localhost:9090'] #El objetivo del que obtendrá métricas será el localhost, y buscará las metricas en el puerto 9090
 ``` 
 
 Es muy importante la identación del archivo, ya que estamos ante un fichero en formato `yaml`, y una mala identación nos dará fallos en la configuración.
@@ -54,11 +54,11 @@ scrape_configs:
 
 Es importante para confirmar que no de fallos usar la herramienta `promtool`, la cual viene con Prometheus para checkear diversas configuraciones de Prometheus.
 
-![[Pasted image 20240520202819.png]]
+![[images/Pasted image 20240520202819.png]]
 
 Con esta configuración Prometheus recogerá automaticamente las métricas que se expongan en esas dos direcciones IP en los puertos 9182, hay que recordar siempre recargar el servicio para actualice la configuración y comprobar que el servicio se ejecuto correctamente.
 
-![[Pasted image 20240520203331.png]]
+![[images/Pasted image 20240520203331.png]]
 
 
 ### Influxdb
@@ -66,11 +66,11 @@ Con esta configuración Prometheus recogerá automaticamente las métricas que s
 Influxdb puede configurarse tanto por linea de comandos con `influx` como por vía web en el puerto 8086, la primera configuración será más cómoda por vía web, es por donde lo haremos en este tutorial.
 
 1. Iniciamos el servicio influxdb, ya que en la instalación no lo activamos.
-![[Pasted image 20240520203843.png]]
+![[images/Pasted image 20240520203843.png]]
 2. Al acceder desde el navegador en otra máquina nos saldrá esta interfaz la primera vez para su configuración.
- ![[Pasted image 20240520204050.png]]
+ ![[images/Pasted image 20240520204050.png]]
  3. Nos pedirá la creación de un usuario y su contraseña, así como la creación de una  `organization` y un `bucket`
 	 1. Un **bucket** es: Un bucket es una unidad de almacenamiento en InfluxDB que almacena datos de series temporales. Cada bucket tiene un nombre único, una política de retención
 	 2. Una **organization** es: Una organización es un contenedor lógico en InfluxDB que agrupa buckets y usuarios.
 
-![[Pasted image 20240520204357.png]]
+![[images/Pasted image 20240520204357.png]]
