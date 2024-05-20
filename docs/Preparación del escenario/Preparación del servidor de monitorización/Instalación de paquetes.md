@@ -25,7 +25,7 @@ apt install wget apt-transport-https software-properties-common openssh-server a
 ```
 
 La función de los paquetes instalados será la siguiente:
-- - **wget:** Descargar archivos de Internet desde la línea de comandos.
+- **wget:** Descargar archivos de Internet desde la línea de comandos.
 - **apt-transport-https:** Permite que apt use HTTPS para descargar paquetes de repositorios.
 - **software-properties-common:** Proporciona herramientas para administrar repositorios de software.
 - **sudo**: Permite ejecutar comandos con privilegios elevados, mejorando la seguridad y la gestión del sistema.
@@ -275,4 +275,3 @@ Gracias por instalar conmigo
 sleep 5
 exit 0
 ```
-
