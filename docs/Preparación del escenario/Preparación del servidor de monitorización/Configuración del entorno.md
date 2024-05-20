@@ -79,8 +79,35 @@ Influxdb puede configurarse tanto por linea de comandos con `influx` como por v�
 
 2. Al acceder desde el navegador en otra máquina nos saldrá esta interfaz la primera vez para su configuración. 
  <img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/04.png" />
- 1. Nos pedirá la creación de un usuario y su contraseña, así como la creación de una  `organization` y un `bucket`
+ 3. Nos pedirá la creación de un usuario y su contraseña, así como la creación de una  `organization` y un `bucket`
 	 1. Un **bucket** es: Un bucket es una unidad de almacenamiento en InfluxDB que almacena datos de series temporales. Cada bucket tiene un nombre único, una política de retención
 	 2. Una **organization** es: Una organización es un contenedor lógico en InfluxDB que agrupa buckets y usuarios.
 
 <img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/05.png" />
+
+4. Finalmente habremos acabo la configurando, nos saldrá un token, el cual será necesario luego para realizar configuraciones.
+
+<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/06.png" />
+
+5. Una vez ya dentro de Influxdb accedemos a la parte de los scrapers para configurar la recogida de métricas de Prometheus pulsando en `Create scraper`. 
+
+<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/07.png" />
+
+6. Deberemos asignarle un nombre, y elegir el bucket donde se guardarán las métricas, también debemos especificar la IP y puerto de donde recogerá las métricas, por defecto Prometheus expone sus métricas en el puerto 9090
+<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/08.png" />
+
+7. Un ejemplo de como serían las métricas y el lenguaje `Flux`, lenguaje usado por Influxdb
+<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/09.png" />
+
+El código es el siguiente:
+
+``` flux 
+from(bucket: "Dambeaver") // Nombre del bucket del que se leen los datos
+|> range(start: v.timeRangeStart, stop: v.timeRangeStop) // Dos variables que representan el tiempo
+|> filter(fn: (r) => r["_measurement"] == "prometheus_http_response_size_bytes") // el campo que estamos midiendo, en este caso el tamaño de las respuestas http de prometheus
+|> filter(fn: (r) => r["_field"] == "count") // Nos dice que esta contando el número de datos, en este caso cuenta el número de solicitudes
+|> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false) //define el tamaño de la ventana "v.windowPeriod"
+//"fn:mean" La función para aplicar dentro de cada ventana. En este caso, calcula la mean (media)
+//"createEmpty: false" asegura que la consulta no devuelva resultados vacíos para ventanas sin puntos de datos
+|> yield(name: "mean") // el nombre otorgado de la serie de datos
+```
