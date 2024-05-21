@@ -25,7 +25,7 @@ Prometheus, seguiremos con Influxdb y finalizando con Grafana.
 
 ### Prometheus
 
-Prometheus obtiene su objetivo del fichero `Prometheus.yml`, ubicado en la ruta `/etc/prometheus`. Durante la instalación hemos creado una pequeña configuración como esqueleto, la comentaré ahora:
+Prometheus obtiene sus objetivos del fichero `Prometheus.yml`, ubicado en la ruta `/etc/prometheus`. Durante la instalación hemos creado una pequeña configuración como esqueleto, la comentaré ahora:
 
 ``` yaml
 global: # Esta etiqueta indica que los valores de esta parte se aplicaran a toda la estructura siempre y cuando no haya otra etiqueta que la contradiga
@@ -101,7 +101,7 @@ Influxdb puede configurarse tanto por linea de comandos con `influx` como por v�
 
 El código es el siguiente:
 
-``` flux 
+``` 
 from(bucket: "Dambeaver") // Nombre del bucket del que se leen los datos
 |> range(start: v.timeRangeStart, stop: v.timeRangeStop) // Dos variables que representan el tiempo
 |> filter(fn: (r) => r["_measurement"] == "prometheus_http_response_size_bytes") // el campo que estamos midiendo, en este caso el tamaño de las respuestas http de prometheus
@@ -111,3 +111,28 @@ from(bucket: "Dambeaver") // Nombre del bucket del que se leen los datos
 //"createEmpty: false" asegura que la consulta no devuelva resultados vacíos para ventanas sin puntos de datos
 |> yield(name: "mean") // el nombre otorgado de la serie de datos
 ```
+
+
+### Grafana
+
+Grafana se configura en su mayoría por vía web, aunque podemos modificar su configuración en el fichero `/etc/grafana/grafana.ini`, hay configuraciones interesantes que veremos más adelante, en el fichero podemos modificar opciones como el protocolo que usará por defecto, si usará certificados para mejorar su seguridad, la IP en la que se expondrá el servicio y/o su puerto, así como las credenciales por defecto que usaremos la primera vez, así como la configuración de smtp para enviar alertar, lo cual veremos más adelante.
+
+<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/10.png" />
+
+Por ahora dejaremos la configuración por defecto.
+
+<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/11.png" />
+
+Inmediatamente para una mejor seguridad nos exigirá cambiar la contraseña por una más compleja.
+
+<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/12.png" />
+
+Finalmente está es la interfaz web de Grafana.
+
+![[13.png]]
+
+Lo primero que deberemos hacer será añadir una fuente de datos, es lo haremos con `Open Menu > Connections > Add new conection`
+
+![[14.png]]
+
+Veremos una gran cantidad de posibles fuentes de datos, aunque en nuestro caso elegiremos 
