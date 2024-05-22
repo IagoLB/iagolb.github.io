@@ -129,10 +129,28 @@ Inmediatamente para una mejor seguridad nos exigirá cambiar la contraseña por 
 
 Finalmente está es la interfaz web de Grafana.
 
-![[13.png]]
+<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/13.png" />
 
 Lo primero que deberemos hacer será añadir una fuente de datos, es lo haremos con `Open Menu > Connections > Add new conection`
 
-![[14.png]]
+<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/14.png" />
 
-Veremos una gran cantidad de posibles fuentes de datos, aunque en nuestro caso elegiremos 
+Veremos una gran cantidad de posibles fuentes de datos, aunque en nuestro caso elegiremos Prometheus, ya que en Influxdb almacenaremos métricas  para revisar a mayor plazo.
+
+<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/15.png" />
+
+Nos saldrá un ventana con un resumen del plugin, en este caso nativo, así como un enlace a la documentación y la posibilidad de ver el histórico de versiones, finalmente pulsaremos en `Add new data source`.
+
+<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/16.png" />
+
+Introducimos la dirección IP del servidor en el que esta alojado Prometheus y, en caso de configurarla el método de autentificación.
+
+<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/17.png" />
+
+Es importante si usamos certificados, aunque sea auto-firmados que los añadamos para que la configuración funciona, también es importante que el intervalo de scraping sea el mismo que el configurado en el fichero `Prometheus.yml`.
+
+<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/18.png" />
+
+Finalmente pulsamos en `Save and test` y si el resultado es correcto nos saldrá un mensaje diciendo `Successfully queried the Prometheus API.` tras lo cual podremos finalmente empezar a crear nuestros dashboards.
+
+<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/19.png" />
