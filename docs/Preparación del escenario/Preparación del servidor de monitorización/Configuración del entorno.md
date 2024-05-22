@@ -104,9 +104,12 @@ El código es el siguiente:
 ``` 
 from(bucket: "Dambeaver") // Nombre del bucket del que se leen los datos
 |> range(start: v.timeRangeStart, stop: v.timeRangeStop) // Dos variables que representan el tiempo
-|> filter(fn: (r) => r["_measurement"] == "prometheus_http_response_size_bytes") // el campo que estamos midiendo, en este caso el tamaño de las respuestas http de prometheus
+|> filter(fn: (r) => r["_measurement"] == "prometheus_http_response_size_bytes")
+// el campo que estamos midiendo, 
+en este caso el tamaño de las respuestas http de prometheus
 |> filter(fn: (r) => r["_field"] == "count") // Nos dice que esta contando el número de datos, en este caso cuenta el número de solicitudes
-|> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false) //define el tamaño de la ventana "v.windowPeriod"
+|> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false) 
+//define el tamaño de la ventana "v.windowPeriod"
 //"fn:mean" La función para aplicar dentro de cada ventana. En este caso, calcula la mean (media)
 //"createEmpty: false" asegura que la consulta no devuelva resultados vacíos para ventanas sin puntos de datos
 |> yield(name: "mean") // el nombre otorgado de la serie de datos
