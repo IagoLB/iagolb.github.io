@@ -140,15 +140,15 @@ Lo primero que deberemos hacer será añadir una fuente de datos, es lo haremos 
 
 Veremos una gran cantidad de posibles fuentes de datos, aunque en nuestro caso elegiremos Prometheus, ya que en Influxdb almacenaremos métricas  para revisar a mayor plazo.
 
-<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/15.png" />
+<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/15.png"  width="900" height="360" />
 
 Nos saldrá un ventana con un resumen del plugin, en este caso nativo, así como un enlace a la documentación y la posibilidad de ver el histórico de versiones, finalmente pulsaremos en `Add new data source`.
 
-<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/16.png" />
+<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/16.png" width="700" height="260" />
 
 Introducimos la dirección IP del servidor en el que esta alojado Prometheus y, en caso de configurarla el método de autentificación.
 
-<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/17.png" />
+<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/17.png" width="900" height="700" />
 
 Es importante si usamos certificados, aunque sea auto-firmados que los añadamos para que la configuración funciona, también es importante que el intervalo de scraping sea el mismo que el configurado en el fichero `Prometheus.yml`.
 
@@ -157,3 +157,32 @@ Es importante si usamos certificados, aunque sea auto-firmados que los añadamos
 Finalmente pulsamos en `Save and test` y si el resultado es correcto nos saldrá un mensaje diciendo `Successfully queried the Prometheus API.` tras lo cual podremos finalmente empezar a crear nuestros dashboards.
 
 <img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/19.png" />
+
+### Testdata
+
+Como aún no hemos configurado el Active Directory vamos a utilizar un plugin llamado Testdata que generara datos para hacer un panel de pruebas.
+
+Lo añadiremos igual que añadimos Prometheus (`Open Menu > Connections > Add new conection`), pero buscando TestData en su lugar.
+
+<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/20.png" />
+
+Igual que antes lo añadimos, pero esta vez pulsamos en `building a dashboard` para ver una demostración,
+
+<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/21.png" />
+
+Ahora tendremos 3 opciones:
+- **Start your new dashboard by adding a visualization**: Crear un nuevo dashboard para la visualización de datos.
+- **Add a library panel**: Un panel re-utilizable de datos que podremos utilizar en diversos dashboards.
+- **Import a dashboard**: Importar un dashboard público.
+
+<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/22.png" />
+
+En este caso crearemos un nuevo dashboard, al crearlo nos dará a elegir cual será la fuente de los datos, en nuestro caso seleccionaremos Testdata.
+
+<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/23.png" />
+
+Al seleccionar la fuente nos aparecerá por defecto una serie temporal, pero podemos elegir otras opciones de visualización, como por ejemplo:
+
+<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/24.png" />
+
+Con esto finalizamos por ahora esta parte y pasamos a la configuración del Active Directory.
