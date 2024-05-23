@@ -1,7 +1,8 @@
 ---
 title: Creación del dominio
 layout: default
-parent: Preparación del escenario
+parent: Preparación del dominio
+grand_parent: Preparación del escenario
 nav_order: 2
 has_children: true
 has_toc: false
