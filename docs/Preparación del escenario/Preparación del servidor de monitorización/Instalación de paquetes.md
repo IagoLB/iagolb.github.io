@@ -20,7 +20,7 @@ has_toc: true
 </details>
 ### Preparando la base
 
-Partiendo de un SO recién instalado lo primero que haremos será actualizar los repositorios y los paquetes que tengamos con el comando:
+Partiendo de un SO `Debian 12` recién instalado lo primero que haremos será actualizar los repositorios y los paquetes que tengamos con el comando:
 
 ```bash
 apt update && apt upgrade
