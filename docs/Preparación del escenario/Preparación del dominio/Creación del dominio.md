@@ -456,3 +456,4 @@ En reglas de autorización indicamos que es una página sólo para los usuarios 
 <img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/109.png" />
 
 Con esto dejamos la base lista para desplegar algunas aplicaciones en el dominio y desplegar la extracción de métricas.
+
