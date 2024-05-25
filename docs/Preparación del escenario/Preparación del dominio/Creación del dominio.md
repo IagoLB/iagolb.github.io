@@ -408,19 +408,19 @@ Finalizamos el asistente.
 
 Marcamos y desmarcamos los registros PTR en la zona de búsqueda directa para que se actualizen en la zona inversa.
 
-![[100.png]]
+<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/100.png" />
 
 Volvemos a añadir en la zona secundaria a DC-02 como servidor de nombres y habilitamos la transferencia de zona.
 
-![[101.png]]
+<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/101.png" />
 
 En el caso de que nuestros servidores no sepan resolver una petición dns y no queramos que vayan a los servidores raíz a preguntar necesitaremos un reenviador, este se configura haciendo click derecho sobre DC-01  y propiedades.
 
-![[102.png]]
+<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/102.png" />
 
 Vamos a la pestaña de reenviadores y ponemos, por ejemplo, los servidores de google.
 
-![[103.png]]
+<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/103.png" />
 
 
 ### Servicio IIS
@@ -429,7 +429,7 @@ El servicio IIS será instalado exclusivamente en `DC-02`.
 
 Para instalar el servicio IIS realizamos la misma configuración que en el DHCP hasta la parte de roles de servidor, donde en este caso seleccionaremos IIS.
 
-![[104.png]]
+<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/104.png" />
 
 En servicios de rol seleccionamos a mayores de las ya seleccionadas:
 - Autentificación básica
@@ -438,22 +438,21 @@ En servicios de rol seleccionamos a mayores de las ya seleccionadas:
 - Restricciones de ip y dominio
 - CGI
 
-![[105.png]]
+<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/105.png" />
 
 Esperamos a que instale y cuando finalice accedemos al servicio IIS.
 
-![[106.png]]
+!<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/106.png" />
 
 Tendremos un sitio por defecto llamado “Default Web Site” que renombraremos a intranet haciendo click derecho sobre su icono y eligiendo la opción de cambiar nombre.
 
-![[107.png]]
-
+<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/107.png" />
 Iremos a autentificación y deshabilitamos la Autentificación anónima y habilitamos la Autentificación de Windows.
 
-![[108.png]]
+<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/108.png" />
 
 En reglas de autorización indicamos que es una página sólo para los usuarios del dominio.
 
-![[109.png]]
+<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/109.png" />
 
 Con esto dejamos la base lista para desplegar algunas aplicaciones en el dominio y desplegar la extracción de métricas.
