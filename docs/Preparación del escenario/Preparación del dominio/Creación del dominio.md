@@ -331,3 +331,129 @@ Veremos en el servidor secundario como nos aparecio el ámbito tras realizar la 
 
 ### Servicio DNS
 
+El servicio DNS será instalado en `DC-01` con `DC-02` como servidor secundario.
+
+Para instalar el servicio DNS realizamos la misma configuración que en el DHCP hasta la parte de roles de servidor, donde en este caso seleccionaremos DNS.
+
+<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/81.png" />
+
+Le damos a siguiente hasta que tengamos la opción de instalar.
+
+<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/82.png" />
+
+Para configurarlo en la parte de Herramientas de la administración del servidor debería salirnos ahora el servicio DNS.
+
+<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/83.png" />
+
+En el administrador de DNS hacemos click derecho en “Zonas de búsqueda directa” y pulsamos en zona nueva.
+
+<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/84.png" />
+
+Le damos a siguiente en el asistente.
+
+<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/85.png" />
+
+Escogemos el tipo de zona que queremos, en este caso una zona principal.
+
+<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/86.png" />
+
+Escogemos como queremos que sea la replicación de la zona DNS.
+
+<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/87.png" />
+
+Escribimos el nombre que tendra esta zona.
+
+<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/88.png" />
+
+Al tener el servidor un servicio DHCP ya configurado vamos a permitir actualizaciones dinamicas seguras, esto significa que los servidores DHCP podrán realizar actualizaciones sobre los registros DNS.
+
+<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/89.png" />
+
+Seleccionamos finalizar la creación de la zona.
+
+<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/90.png" />
+
+Añadimos un registro para el DC-02 y permitimos que se le transfiera la zona.
+
+<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/91.png" />
+<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/92.png" />
+
+Ahora agregaremos la zona de búsqueda inversa, para resolver IP\`s a nombres.
+
+<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/93.png" />
+
+Seleccionamos zona principal.
+
+<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/94.png" />
+
+Seleccionamos como queremos que se repliquen los datos.
+
+<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/95.png" />
+
+Seleccionamos si la búsqueda será para direcciones IPv4 ó IPv6, en este caso IPv4.
+
+<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/96.png" />
+
+Seleccionamos la parte de la red correspondiente a la máscara.
+
+<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/97.png" />
+
+Permitimos actualizaciones dinámicas para esta zona.
+
+<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/98.png" />
+
+Finalizamos el asistente.
+
+<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/99.png" />
+
+Marcamos y desmarcamos los registros PTR en la zona de búsqueda directa para que se actualizen en la zona inversa.
+
+![[100.png]]
+
+Volvemos a añadir en la zona secundaria a DC-02 como servidor de nombres y habilitamos la transferencia de zona.
+
+![[101.png]]
+
+En el caso de que nuestros servidores no sepan resolver una petición dns y no queramos que vayan a los servidores raíz a preguntar necesitaremos un reenviador, este se configura haciendo click derecho sobre DC-01  y propiedades.
+
+![[102.png]]
+
+Vamos a la pestaña de reenviadores y ponemos, por ejemplo, los servidores de google.
+
+![[103.png]]
+
+
+### Servicio IIS
+
+El servicio IIS será instalado exclusivamente en `DC-02`.
+
+Para instalar el servicio IIS realizamos la misma configuración que en el DHCP hasta la parte de roles de servidor, donde en este caso seleccionaremos IIS.
+
+![[104.png]]
+
+En servicios de rol seleccionamos a mayores de las ya seleccionadas:
+- Autentificación básica
+- Autentificación de Windows
+- Autorización para URL
+- Restricciones de ip y dominio
+- CGI
+
+![[105.png]]
+
+Esperamos a que instale y cuando finalice accedemos al servicio IIS.
+
+![[106.png]]
+
+Tendremos un sitio por defecto llamado “Default Web Site” que renombraremos a intranet haciendo click derecho sobre su icono y eligiendo la opción de cambiar nombre.
+
+![[107.png]]
+
+Iremos a autentificación y deshabilitamos la Autentificación anónima y habilitamos la Autentificación de Windows.
+
+![[108.png]]
+
+En reglas de autorización indicamos que es una página sólo para los usuarios del dominio.
+
+![[109.png]]
+
+Con esto dejamos la base lista para desplegar algunas aplicaciones en el dominio y desplegar la extracción de métricas.
