@@ -10,7 +10,7 @@ has_toc: false
 
 ### Contenido
 
-- [Preparación del servidor de monitorización](https://github.com/IagoLB/iagolb.github.io/tree/main/docs/Preparaci%C3%B3n%20del%20escenario/Preparaci%C3%B3n%20del%20servidor%20de%20monitorizaci%C3%B3n)
+- [Preparación del servidor de monitorización](https://iagolb.github.io/docs/Preparaci%C3%B3n%20del%20escenario/Preparaci%C3%B3n%20del%20servidor%20de%20monitorizaci%C3%B3n)
 
-- [Preparación del dominio](https://github.com/IagoLB/iagolb.github.io/tree/main/docs/Preparaci%C3%B3n%20del%20escenario/Preparaci%C3%B3n%20del%20dominio)
+- [Preparación del dominio](https://iagolb.github.io/docs/Preparaci%C3%B3n%20del%20escenario/Preparaci%C3%B3n%20del%20dominio)
 
