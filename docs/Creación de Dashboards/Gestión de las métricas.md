@@ -64,7 +64,6 @@ Para crear ese archivo vamos a crear un script en Python que se ejecute mediante
 
 ```python
 #!/usr/bin/python3
-
 import subprocess
 import concurrent.futures
 
@@ -73,16 +72,12 @@ def ping(ip):
     result = subprocess.run(command, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     return f"'{ip}:9182'" if result.returncode == 0 else None
 
-def ping_with_notification(ip):
-    print(f"Pingeando: {ip}")
-    return ping(ip)
-
 def main():
     ip_range = [f"172.19.0.{i}" for i in range(20, 250)]
 
     results = []
     with concurrent.futures.ThreadPoolExecutor() as executor:
-        future_to_ip = {executor.submit(ping_with_notification, ip): ip for ip in ip_range}
+        future_to_ip = {executor.submit(ping, ip): ip for ip in ip_range}
         for future in concurrent.futures.as_completed(future_to_ip):
             ip = future_to_ip[future]
             if future.result() is not None:
@@ -90,10 +85,8 @@ def main():
 
     output = "- targets: [" + ", ".join(results) + "]\n"
 
-    with open("clientes.yml", "w") as output_file:
+    with open("/etc/prometheus/clientes.yml", "w") as output_file:
         output_file.write(output)
-
-    print("Ping completado. Las direcciones IP que respondieron se han guardado en clientes.yml.")
 
 if __name__ == "__main__":
     main()
