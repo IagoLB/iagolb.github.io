@@ -3,7 +3,7 @@ title: Gestión de las métricas
 layout: default
 parent: Creación de Dashboards
 nav_order: 2
-has_children: true
+has_children: false
 has_toc: false
 ---
 
