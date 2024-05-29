@@ -29,7 +29,7 @@ Si pulsamos sobre alguno de los `endpoints` nos redirigirá a la página creada 
 
 <img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/147.png" />
 
-Como sólo hemos configurado la recolección de métricas de los servidores no detecta, por lo que a continuación crearemos un servicio de descubrimiento para prometheus.
+Como sólo hemos configurado la recolección de métricas de los servidores no detecta los clientes, por lo que a continuación crearemos un servicio de descubrimiento para prometheus.
 
 # Service discovery
 
