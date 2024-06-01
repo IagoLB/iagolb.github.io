@@ -19,9 +19,9 @@ has_toc: false
 {:toc}
 </details>
 
-### Paneles de Grafana
+## Paneles de Grafana
 
-#### Qué son los dashboard
+### Qué son los dashboard
 
 Un Dashboard es como el tablero de instrumentos de un coche, proporciona información sobre el funcionamiento del vehículo, como la velocidad, las RPM y el nivel de combustible. De manera similar, los paneles de Grafana son interfaces visuales que permiten monitorizar y comprender el estado de los sistemas e infraestructuras.
 
@@ -45,7 +45,7 @@ Los datos pasan por una serie de procesos para convertirse en un dashboard.
 
 <img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/Dashboard.png" />
 
-#### Creación del primer dashboard
+### Creación del primer dashboard
 
 
 Antes de empezar el primer dashboard tengo que explicar que hay 3 tipos principales de datos para trabajar con ellos:
@@ -68,8 +68,9 @@ He de añadir que existe un 4º tipo, que es el `String`, aunque este implementa
 Empezaremos creando, por ejemplo un panel para controlar el uso de la CPU:
 
 `windows_cpu_time_total`
+
 <img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/150.png" />
-![[150.png]]
+
 
 Con esa consulta nos da el tiempo de uso para la CPU, pero como no añadimos ningún filtro salen todos los datos de todos los equipos de los que obtenemos los datos, ahora filtraremos los datos para obtener sólo los del DC-01:
 
@@ -103,7 +104,7 @@ Finalmente vamos hacer una opción para convertirlo en un porcentaje, y modifica
 En este caso hemos calculado el uso de la CPU al restar la tasa de cambio del tiempo de inactividad de 100, la expresión intenta estimar el porcentaje de utilización de la CPU. Un mayor tiempo de inactividad indica una menor utilización de la CPU.
 
 
-#### Creación de un dashboard dinámico
+### Creación de un dashboard dinámico
 
 Hemos realizado un dashboard estático, ya que hemos especificado el ordenador que está monitoreando, pero esto no es útil si tenemos varios equipos y un servicio de discovery, razón por la que vamos a crear variables de entorno para tener dashboard dinámicos.
 
@@ -157,9 +158,9 @@ En la 1º consulta es necesario especificar el Hostname y el núcleo del que que
 
 En la 2º consulta ya filtramos al Hostname por la instancia y con la función `avg` calculamos automáticamente el uso medio de todos los núcleos del Hostname  
 
-#### Creación de un dashboard con varias métricas
+### Creación de un dashboard con varias métricas
 
-##### Cálculo de RAM
+#### Cálculo de RAM
 
 Vamos a calcular el porcentaje de RAM usada, para ello usaremos:
 
@@ -192,7 +193,7 @@ En estas querys estamos usando un filtro de expresiones regulares para que no in
 
 <img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/167.png" />
 
-##### Control de procesos
+#### Control de procesos
 
 También hay funciones que nos permites hacer lo contrario que el ejemplo anterior, con una única query podemos obtener varios datos, por ejemplo:
 
