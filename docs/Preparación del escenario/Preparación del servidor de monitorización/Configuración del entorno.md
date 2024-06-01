@@ -47,7 +47,7 @@ global:
   scrape_interval: 60s
 
 scrape_configs:
-  - job_name: 'Servers'
+  - job_name: 'Server 1'
   scrape_interval: 60s
   scrape_timeout: 5s
   static_configs:
@@ -55,7 +55,10 @@ scrape_configs:
       labels: #Usamos esta opción para indicar que vamos a crear etiquetas para asociar una IP a un nombre concreto
        hostname: 'DC-01' #Nombre asociado a la IP
        type: 'server' #Esta etiqueta asigna el tipo "server" al servidor de destino.
-
+  - job_name: 'Server 2'
+  scrape_interval: 60s
+  scrape_timeout: 5s
+  static_configs:
     - targets: ['172.19.0.11:9182']
       labels:
        hostname: 'DC-02'
