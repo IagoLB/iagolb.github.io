@@ -19,9 +19,9 @@ has_toc: false
 {:toc}
 </details>
 
-## Paneles de Grafana
+# Paneles de Grafana
 
-### Qué son los dashboard
+## Qué son los dashboard
 
 Un Dashboard es como el tablero de instrumentos de un coche, proporciona información sobre el funcionamiento del vehículo, como la velocidad, las RPM y el nivel de combustible. De manera similar, los paneles de Grafana son interfaces visuales que permiten monitorizar y comprender el estado de los sistemas e infraestructuras.
 
@@ -45,7 +45,7 @@ Los datos pasan por una serie de procesos para convertirse en un dashboard.
 
 <img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/Dashboard.png" />
 
-### Creación del primer dashboard
+## Creación del primer dashboard
 
 
 Antes de empezar el primer dashboard tengo que explicar que hay 3 tipos principales de datos para trabajar con ellos:
@@ -104,7 +104,7 @@ Finalmente vamos hacer una opción para convertirlo en un porcentaje, y modifica
 En este caso hemos calculado el uso de la CPU al restar la tasa de cambio del tiempo de inactividad de 100, la expresión intenta estimar el porcentaje de utilización de la CPU. Un mayor tiempo de inactividad indica una menor utilización de la CPU.
 
 
-### Creación de un dashboard dinámico
+# Creación de un dashboard dinámico
 
 Hemos realizado un dashboard estático, ya que hemos especificado el ordenador que está monitoreando, pero esto no es útil si tenemos varios equipos y un servicio de discovery, razón por la que vamos a crear variables de entorno para tener dashboard dinámicos.
 
@@ -150,17 +150,17 @@ Ahora adaptaremos el dashboard para hacerlo dinámico cambiando las variables es
 
 - Diferencias entre las consultas:
 
-1. `100 -(irate(windows_cpu_time_total{hostname="DC-01",mode="idle",core="0,0"}[2m])) * 100`
+	1. `100 -(irate(windows_cpu_time_total{hostname="DC-01",mode="idle",core="0,0"}[2m])) * 100`
 
-2. `100 - (avg by (instance) (irate(windows_cpu_time_total{job=~"$job",mode="idle"}[2m])) * 100)`
+	2. `100 - (avg by (instance) (irate(windows_cpu_time_total{job=~"$job",mode="idle"}[2m])) * 100)`
 
 En la 1º consulta es necesario especificar el Hostname y el núcleo del que queremos obtener las métricas.
 
 En la 2º consulta ya filtramos al Hostname por la instancia y con la función `avg` calculamos automáticamente el uso medio de todos los núcleos del Hostname  
 
-### Creación de un dashboard con varias métricas
+## Creación de un dashboard con varias métricas
 
-#### Cálculo de RAM
+### Cálculo de RAM
 
 Vamos a calcular el porcentaje de RAM usada, para ello usaremos:
 
@@ -179,7 +179,7 @@ Así obtendríamos el porcentaje de uso de la memoria RAM:
 
 <img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/166.png" />
 
-##### Control de red
+### Control de red
 
 Hasta ahora sólo estábamos usando 1 query para obtener los Dashboards, pero podremos utilizar varias querys para obtener Dashboards más complejos, por ejemplo vamos a crear un Dashboard con dos querys, una para medir los datos enviados por las interfaces de red y otra query para los datos recibidos.
 
@@ -193,7 +193,7 @@ En estas querys estamos usando un filtro de expresiones regulares para que no in
 
 <img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/167.png" />
 
-#### Control de procesos
+### Control de procesos
 
 También hay funciones que nos permites hacer lo contrario que el ejemplo anterior, con una única query podemos obtener varios datos, por ejemplo:
 
@@ -203,3 +203,67 @@ También hay funciones que nos permites hacer lo contrario que el ejemplo anteri
 
 Esto es posible porque la query agrupa los servicios por el estado.
 
+Para hacerlo más visual, ya que el objetivo es conocer el estado de un sistema simplemente mirando los paneles vamos a agruparlos a la derecha del dashboard en modo tabla, para ello:
+
+- Habilitamos la leyenda, especificamos que se muestre a la derecha y le indicamos que valores deberá mostrar en la leyenda, `Last *` muestra los últimos valores excluyendo los nulos.
+
+<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/169.png" />
+
+### Control de discos
+
+Podemos monitorizar por ejemplo el espacio ocupado en las distintas particiones de los equipos, o su velocidad de escritura y lectura, así como el I/O de una unidad, empezaremos con el espacio ocupado por las unidades.
+
+
+
+- Para el espacio ocupado por las particiones usaremos una query con dos consultas:
+
+1. `windows_logical_disk_free_bytes`: Espacio sin usar en el disco.
+2. `windows_logical_disk_size_bytes`: Tamaño total del disco.
+
+`100 - (windows_logical_disk_free_bytes{job=~"$job", instance=~"$instance", volume=~".:"} / windows_logical_disk_size_bytes{job=~"$job", instance=~"$instance", volume=~".:"}) * 100`
+
+Esa query filtra por `Job` e `Instance` y busca volúmenes con el formato `X:` que es el formato estándar en sistemas Windows, y calcula el porcentaje como hemos hecho en ejemplos anteriores.
+
+<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/170.png" />
+
+Hasta ahora hemos usado dashboards de series temporales, pero hay más formatos, por ejemplo para este caso podríamos ponerlo como medidor o `Gauge`, lo cual sería más acorde.
+
+<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/171.png" />]
+
+También podríamos usar un `Bar Gauge` o diagrama de barras.
+
+<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/172.png" />
+
+Si añadimos un nuevo disco en el servidor al haber 2 expresiones regulares que cumplen la expresión el dashboard se convertirá en algo similar a esto, con el nombre completo.
+
+<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/173.png" />
+
+Para solucionarlo vamos a `Query inspector > JSON > buscamos la etiqueta de "legendFormat", que debería estar en "__auto" > la cambiamos por "{{volume}}"`
+
+<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/174.png" />
+
+Tras aplicarlo nos aparecerá correctamente el nombre del volumen.
+
+<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/175.png" />
+
+- Para la velocidad de escritura y lectura:
+
+Crearemos 2 querys distintas, una para la velocidad de lectura y otra para la velocidad de escritura, empezaremos por la de lectura:
+
+`irate(windows_logical_disk_read_bytes_total{job=~"$job",instance=~"$instance", volume=~".:"}[5m])`
+
+Y la de escritura:
+
+`irate(windows_logical_disk_write_bytes_total{job=~"$job",instance=~"$instance", volume=~".:"}[5m])`
+
+Filtraremos en las opciones del dashboard para que nos muestre la velocidad mínima, máxima, la media y la última.
+
+<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/176.png" />
+
+Como nos encontramos el mismo error con el nombre repetiremos los pasos de la opción anterior, en este caso añadiendo también una etiqueta descriptiva en el nombre para diferenciarlos.
+
+<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/177.png" />
+
+Quedando el dashboard tal que así:
+
+<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/178.png" />
