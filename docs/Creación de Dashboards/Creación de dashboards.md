@@ -511,7 +511,7 @@ Ahora añadiremos algunas métricas para controlar el estado del sistema, como l
 
 Quedaría esta sección tal que así:
 
-![[207.png]]
+<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/207.png" />
 
 Ahora añadiremos algunos paneles para el control del servidor, controlaremos que los servicios como el DHCP, el DNS, la base de datos o el servicio IIS están funcionando correctamente.
 
@@ -556,10 +556,10 @@ Para su visualización estará en formato `Gauge`, y realizaremos las transforma
 Tendremos un resultado como este:
 
 
-![[208.png]]
+<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/208.png" />
 
 Y en caso de que algún servicio se detuviese, por ejemplo MariaDB:
 
-![[209.png]]
+<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/209.png" />
 
 Con este habremos creado un Dashboard con el que podremos monitorizar de forma dinámica y bastante completa, así como la posibilidad de servir de guía para personas interesadas, pasaremos a las alertas, pero en caos de que se quiera probar este dashboard adjunto el código JSON para su creación [Aquí](https://github.com/IagoLB/iagolb.github.io/blob/main/images/Mastering_AD.json)
