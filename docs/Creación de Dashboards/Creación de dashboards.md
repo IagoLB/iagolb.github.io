@@ -493,3 +493,73 @@ Añadiremos más paneles para controlar el uso de la CPU, los estados de la memo
 Tras estos cambios quedaría esta sección del dashboard tal que así:
 
 <img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/206.png" />
+
+Ahora añadiremos algunas métricas para controlar el estado del sistema, como los errores de red, el número de hilos del sistemas, o el número de excepciones del sistema:
+
+- Errores de red:
+	Querys:
+	- `irate(windows_net_packets_received_discarded_total{job=~"$job",instance=~"$instance", nic!~"(?i:(.*(isatap|VPN).*))"}[5m]) + irate(windows_net_packets_received_errors_total{job=~"$job",instance=~"$instance"}[5m])`
+
+	- `- irate(windows_net_packets_outbound_discarded_total{instance=~"$instance", nic!~"(?i:(.*(isatap|VPN).*))"}[5m]) + irate(windows_net_packets_outbound_errors_total{instance=~"$instance"}[5m])`
+- Threads:
+	Query:
+	- `windows_system_threads{instance=~"$instance"}`
+
+- Excepciones:
+	Query:
+	- `irate(windows_system_exception_dispatches_total{instance=~"$instance"}[5m])`
+
+Quedaría esta sección tal que así:
+
+![[207.png]]
+
+Ahora añadiremos algunos paneles para el control del servidor, controlaremos que los servicios como el DHCP, el DNS, la base de datos o el servicio IIS están funcionando correctamente.
+
+Ya que este panel no será dependiente de la `instance` ni del `job` crearemos un nuevo `row`
+
+Haremos querys personalizadas para cada servicio:
+
+- DHCP DC-01:
+	Query:
+	- `windows_service_state{name=~"dhcpserver",instance="172.19.0.10:9182",state="running"}`
+
+- DNS DC-01:
+	Query:
+	- `windows_service_state{name=~"dns",instance="172.19.0.10:9182",state="running"}`
+
+- AD DC-01:
+	Query:
+	- `windows_service_state{name="ntds",instance="172.19.0.10:9182",state="running"}`
+
+- DHCP DC-02:
+	Query:
+	- `windows_service_state{name=~"dhcpserver",instance="172.19.0.11:9182",state="running"}`
+
+- DNS DC-02:
+	Query:
+	- `windows_service_state{name=~"dns",instance="172.19.0.11:9182",state="running"}`
+
+- IIS DC-02:
+	Query:
+	- `windows_service_state{name="w3svc",instance="172.19.0.11:9182",state="running"}`
+
+- MariaDB DC-02:
+	Query:
+	- `windows_service_state{name="mariadb",instance="172.19.0.11:9182",state="running"}
+
+- AD DC-02:
+	Query:
+	- `windows_service_state{name="ntds",instance="172.19.0.11:9182",state="running"}`
+
+Para su visualización estará en formato `Gauge`, y realizaremos las transformaciones vistas en el panel principal para su visualización.
+
+Tendremos un resultado como este:
+
+
+![[208.png]]
+
+Y en caso de que algún servicio se detuviese, por ejemplo MariaDB:
+
+![[209.png]]
+
+Con este habremos creado un Dashboard con el que podremos monitorizar de forma dinámica y bastante completa, así como la posibilidad de servir de guía para personas interesadas, pasaremos a las alertas, pero en caos de que se quiera probar este dashboard adjunto el código JSON para su creación [Aquí]()
