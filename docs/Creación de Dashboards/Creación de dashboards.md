@@ -562,4 +562,4 @@ Y en caso de que algún servicio se detuviese, por ejemplo MariaDB:
 
 ![[209.png]]
 
-Con este habremos creado un Dashboard con el que podremos monitorizar de forma dinámica y bastante completa, así como la posibilidad de servir de guía para personas interesadas, pasaremos a las alertas, pero en caos de que se quiera probar este dashboard adjunto el código JSON para su creación [Aquí]()
+Con este habremos creado un Dashboard con el que podremos monitorizar de forma dinámica y bastante completa, así como la posibilidad de servir de guía para personas interesadas, pasaremos a las alertas, pero en caos de que se quiera probar este dashboard adjunto el código JSON para su creación [Aquí](https://github.com/IagoLB/iagolb.github.io/blob/main/images/Mastering_AD.json)
