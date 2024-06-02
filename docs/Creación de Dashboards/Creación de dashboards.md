@@ -45,10 +45,10 @@ Los datos pasan por una serie de procesos para convertirse en un dashboard.
 
 <img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/Dashboard.png" />
 
-## Creación del primer dashboard
+## Creación del primer panel
 
 
-Antes de empezar el primer dashboard tengo que explicar que hay 3 tipos principales de datos para trabajar con ellos:
+Antes de empezar el primer panel tengo que explicar que hay 3 tipos principales de datos para trabajar con ellos:
 
 1. Vector instantáneo (instant vector):
 	Representa un conjunto de series temporales, cada una con un único valor para un momento específico en el tiempo.
@@ -95,7 +95,7 @@ Como tenemos 2 núcleos de procesador vamos a filtrar por un único núcleo.
 
 <img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/154.png" />
 
-Finalmente vamos hacer una opción para convertirlo en un porcentaje, y modificar la unidad de medida del dashboard a un porcentaje.
+Finalmente vamos hacer una opción para convertirlo en un porcentaje, y modificar la unidad de medida del panel a un porcentaje.
 
 `100 -(irate(windows_cpu_time_total{hostname="DC-01",mode="idle",core="0,0"}[2m])) * 100`
 
@@ -104,9 +104,9 @@ Finalmente vamos hacer una opción para convertirlo en un porcentaje, y modifica
 En este caso hemos calculado el uso de la CPU al restar la tasa de cambio del tiempo de inactividad de 100, la expresión intenta estimar el porcentaje de utilización de la CPU. Un mayor tiempo de inactividad indica una menor utilización de la CPU.
 
 
-# Creación de un dashboard dinámico
+# Creación paneles dinámicos
 
-Hemos realizado un dashboard estático, ya que hemos especificado el ordenador que está monitoreando, pero esto no es útil si tenemos varios equipos y un servicio de discovery, razón por la que vamos a crear variables de entorno para tener dashboard dinámicos.
+Hemos realizado un panel estático, ya que hemos especificado el ordenador que está monitoreando, pero esto no es útil si tenemos varios equipos y un servicio de discovery, razón por la que vamos a crear variables de entorno para tener panel dinámicos.
 
 Para ello vamos a las opciones del dashboard.
 
@@ -142,7 +142,7 @@ En el menú del dashboard ahora tendremos esta interfaz, donde podremos filtrar 
 
 <img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/163.png" />
 
-Ahora adaptaremos el dashboard para hacerlo dinámico cambiando las variables estáticas por dinámicas. 
+Ahora adaptaremos el panel para hacerlo dinámico cambiando las variables estáticas por dinámicas. 
 
 `100 - (avg by (instance) (irate(windows_cpu_time_total{job=~"$job",mode="idle"}[2m])) * 100)`
 
@@ -158,7 +158,7 @@ En la 1º consulta es necesario especificar el Hostname y el núcleo del que que
 
 En la 2º consulta ya filtramos al Hostname por la instancia y con la función `avg` calculamos automáticamente el uso medio de todos los núcleos del Hostname  
 
-## Creación de un dashboard con varias métricas
+## Creación de un panel con varias métricas
 
 ### Cálculo de RAM
 
@@ -181,7 +181,7 @@ Así obtendríamos el porcentaje de uso de la memoria RAM:
 
 ### Control de red
 
-Hasta ahora sólo estábamos usando 1 query para obtener los Dashboards, pero podremos utilizar varias querys para obtener Dashboards más complejos, por ejemplo vamos a crear un Dashboard con dos querys, una para medir los datos enviados por las interfaces de red y otra query para los datos recibidos.
+Hasta ahora sólo estábamos usando 1 query para obtener los paneles, pero podremos utilizar varias querys para obtener panel más complejos, por ejemplo vamos a crear upanelon dos querys, una para medir los datos enviados por las interfaces de red y otra query para los datos recibidos.
 
 - Datos enviados:
 `max by (instance) (irate(windows_net_bytes_sent_total{job=~"$job",nic!~"(?i:(.*(isatap|VPN).*))"}[2m]))*8`
@@ -203,7 +203,7 @@ También hay funciones que nos permites hacer lo contrario que el ejemplo anteri
 
 Esto es posible porque la query agrupa los servicios por el estado.
 
-Para hacerlo más visual, ya que el objetivo es conocer el estado de un sistema simplemente mirando los paneles vamos a agruparlos a la derecha del dashboard en modo tabla, para ello:
+Para hacerlo más visual, ya que el objetivo es conocer el estado de un sistema simplemente mirando los paneles vamos a agruparlos a la derecha del panel en modo tabla, para ello:
 
 - Habilitamos la leyenda, especificamos que se muestre a la derecha y le indicamos que valores deberá mostrar en la leyenda, `Last *` muestra los últimos valores excluyendo los nulos.
 
@@ -226,7 +226,7 @@ Esa query filtra por `Job` e `Instance` y busca volúmenes con el formato `X:` q
 
 <img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/170.png" />
 
-Hasta ahora hemos usado dashboards de series temporales, pero hay más formatos, por ejemplo para este caso podríamos ponerlo como medidor o `Gauge`, lo cual sería más acorde.
+Hasta ahora hemos usado panel de series temporales, pero hay más formatos, por ejemplo para este caso podríamos ponerlo como medidor o `Gauge`, lo cual sería más acorde.
 
 <img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/171.png" />]
 
@@ -234,7 +234,7 @@ También podríamos usar un `Bar Gauge` o diagrama de barras.
 
 <img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/172.png" />
 
-Si añadimos un nuevo disco en el servidor al haber 2 expresiones regulares que cumplen la expresión el dashboard se convertirá en algo similar a esto, con el nombre completo.
+Si añadimos un nuevo disco en el servidor al haber 2 expresiones regulares que cumplen la expresión el panel se convertirá en algo similar a esto, con el nombre completo.
 
 <img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/173.png" />
 
@@ -256,7 +256,7 @@ Y la de escritura:
 
 `irate(windows_logical_disk_write_bytes_total{job=~"$job",instance=~"$instance", volume=~".:"}[5m])`
 
-Filtraremos en las opciones del dashboard para que nos muestre la velocidad mínima, máxima, la media y la última.
+Filtraremos en las opciones del panel para que nos muestre la velocidad mínima, máxima, la media y la última.
 
 <img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/176.png" />
 
@@ -264,6 +264,154 @@ Como nos encontramos el mismo error con el nombre repetiremos los pasos de la op
 
 <img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/177.png" />
 
-Quedando el dashboard tal que así:
+Quedando el panel tal que así:
 
 <img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/178.png" />
+
+
+Otro dato interesante que monitorear de los discos es el número de operaciones de lectura y escritura por segundo, conocido por el termino `Disk I/O`, para ello utilizaremos dos querys.
+
+`max by (instance) (irate(windows_logical_disk_writes_total{job=~"$job", volume=~".:"}[2m]))`
+
+`-max by (instance) (irate(windows_logical_disk_reads_total{job=~"$job", volume=~".:"}[2m]))`
+
+En la 1º query obtenemos el total de escrituras de disco por `instance` y en la segunda obtenemos el total por `instance`, la segundo está en negativo para mejorar la visibilidad.
+
+<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/179.png" />
+
+Para mejorar su visibilidad modificaremos algunas de las opciones por defecto, añadiremos unas etiquetas para identificar fácilmente los datos que estamos viendo, y centraremos la serie temporal en el 0, con la opción de `centered zero`.
+
+<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/180.png" />
+
+Para mejorar un poco más la visualización vamos a introducir colores diferenciales entre las dos querys, para ello en la parte de `Graph styles` buscaremos la opción de `Fill opacity` y pondremos un valor bajo para que no moleste, en mi caso elegiré el 15.
+
+<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/181.png" />
+
+### Filas
+
+Ahora mismo tenemos todos los paneles mezclados y sin ningún orden, para esto existen las filas o Rows en Grafana, las filas nos permiten aplicar filtros, y agrupar paneles en función de su propósito o finalidad, para ello iremos a `Add > Row` y creara un Row o Fila.
+
+<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/182.png" />
+
+Empezaremos personalizando el Row pulsando sobre la rueda que aparece al pasar el ratón por encima:
+
+<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/183.png" />
+
+Empezamos modificando su nombre, añadiendo la variable [$job], para que nos muestre el nombre del job que tengamos seleccionado, por ejemplo con el job `server 1` seleccionado.
+
+<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/184.png" />
+
+Y con el job `server 2 seleccionado`:
+
+<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/185.png" />
+
+
+Ahora añadiremos un panel como tabla que nos muestre información relevante, como el hostname, el dominio, la dirección IP, el SO, el Uptime, la RAM, los porcentajes de CPU, RAM usados y almacenamiento usados, así como el número de procesos o de servicios activos.
+
+Para ello añadiremos un nuevo panel y seleccionaremos el formato de tabla.
+
+Para este apartado necesitaremos las transformaciones, las transformaciones son herramientas que permiten modificar, reorganizar y combinar los datos provenientes de las consultas antes de que se muestren en los paneles.
+
+Por ejemplo la siguiente query con la instancia o el hostname de DC-01 seleccionado:
+
+`windows_cs_hostname` nos devolvería 1 como valor y como nombre `{__name__="windows_cs_hostname", domain="DamBeaver.com", exported_hostname="DC-01", fqdn="DC-01.DamBeaver.com", hostname="DC-01", instance="172.19.0.10:9182", job="Server 1"}`
+
+Con las transformaciones podríamos hacer un filtrado para extraer el dominio o el hostname para crear el panel, en este panel usaremos las siguientes transformaciones:
+
+- **Merge series/tables**
+	Esta transformación es útil para combinar los resultados de varias consultas en un solo resultado, lo cual es particularmente útil cuando se utiliza la visualización del panel de tabla.
+
+- **Organize fields by name**
+	Esta transformación es útil para brindar la flexibilidad de cambiar el nombre, reordenar u ocultar los campos devueltos por una sola consulta en su panel.
+
+Tras aplicar estas transformaciones podremos empezar con las querys, empezaremos con la query:
+
+`windows_os_info{job=~"$job"} * on(instance) group_right(product) windows_cs_hostname`
+
+`windows_os_info{job=~"$job"} * on(instance)` esta parte agrupa todas las métricas de la etiqueta windows_os_info
+
+`group_right(product)` esta parte recupera el valor a la derecha de la etiqueta producto.
+
+`windows_cs_hostname` recupera el hostname.
+
+Con todo eso obtendremos el siguiente panel:
+
+<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/186.png" />
+
+Para separar los valores usaremos los `overrides`
+
+El override, también conocido como anulación de campos, es una funcionalidad que permite modificar o personalizar la configuración de paneles, campos y otras propiedades dentro de un dashboard.
+
+Para ello añadimos un nuevo campo con `Add field override > Field with name`
+
+<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/187.png" />
+
+En la query desplegaremos las opciones y seleccionaremos las opciones:
+- `Legend` > `Verbose`
+
+- `Format` > `Table`
+
+- `Type` > `Instant`
+
+<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/188.png" />
+
+En el campo override ahora podemos sobreescribir cada valor por defecto, por ejemplo en el producto, sobreescribiremos que el campo tenga un ancho de 300 con la siguiente configuración.
+
+<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/189.png" />
+
+Ahora que hemos configurado correctamente los parámetros necesarios podremos ver que en las transformaciones una lista de campos para elegir cuales veremos y cuales no, así como la posibilidad de renombrarlos.
+
+<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/190.png" />
+
+Haremos un filtrado para sólo mostrar el Hostname, el dominio, la IP, y el SO, también podemos cambiar el orden de los valores.
+
+<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/191.png" />
+
+Ahora añadiremos más campos como  el Uptime, la RAM, los porcentajes de CPU, RAM usados y almacenamiento usados, así como el número de procesos o de servicios activos.
+
+- Uptime: 
+	Usaremos la query `time() - windows_system_system_up_time{job=~"$job"}` y obtendremos el uptime en segundos, para adaptarlo usaremos el override apuntando al campo del uptime, y le indicaremos que el campo esta en segundos, Grafana automáticamente lo pasará a la unidad que corresponda según la cantidad.
+	<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/192.png" />
+
+- Total RAM:
+	Usaremos la ya conocida query `windows_cs_physical_memory_bytes{job=~"$job"} - 0`
+	Usaremos el override para convertirlo a Gibibytes.
+	<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/193.png" />
+
+- CPU en uso
+	Usaremos la ya conocida query `100 - (avg by (instance) (irate(windows_cpu_time_total{job=~"$job",mode="idle"}[2m])) * 100)`
+	Usaremos igualmente el override para convertirlo a porcentaje.
+	<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/194.png" />
+
+- RAM en uso
+	Usaremos la ya conocida query `100 - 100 * windows_os_physical_memory_free_bytes{job=~"$job"} / windows_cs_physical_memory_bytes{job=~"$job"}`
+	Usaremos igualmente el override para convertirlo a porcentaje.
+	<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/195.png" />
+
+
+- Almacenamiento C en uso
+	Usaremos la ya conocida query `100 - (windows_logical_disk_free_bytes{job=~"$job",volume=~"C:"}/windows_logical_disk_size_bytes{job=~"$job",volume=~"C:"}) * 100`
+	Usaremos igualmente el override para convertirlo a porcentaje.
+	<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/196.png" />
+
+
+- Número procesos
+	Usaremos la query `windows_os_processes{job=~"$job"}`
+	<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/197.png" />
+
+- Número servicios activos
+	Usaremos la query `sum by (instance) (windows_service_state{job=~"$job",state=~"running"})`
+	<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/198.png" />
+
+- Detalles finales:
+	Con el override podemos añadir diferentes colores, añadiremos colores en campos como la CPU o la RAM para hacerlo más visual.
+	
+	Para ello en las opciones de `override` pulsamos en `Add override property > Cell options > Cell type > Colored Background`
+	<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/199.png" />
+	
+	También podemos poner alertas visuales en caso de que algún campo suba en exceso, para ello en las opciones de `override` pulsamos en `Add override property > Threshold`
+	<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/200.png" />
+
+Quedaría este panel visual tal que así:
+
+<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/201.png" />
