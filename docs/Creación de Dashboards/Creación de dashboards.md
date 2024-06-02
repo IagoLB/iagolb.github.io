@@ -193,7 +193,7 @@ En estas querys estamos usando un filtro de expresiones regulares para que no in
 
 <img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/167.png" />
 
-### Control de procesos
+### Control de servicios
 
 También hay funciones que nos permites hacer lo contrario que el ejemplo anterior, con una única query podemos obtener varios datos, por ejemplo:
 
@@ -287,7 +287,7 @@ Para mejorar un poco más la visualización vamos a introducir colores diferenci
 
 <img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/181.png" />
 
-### Filas
+## Filas
 
 Ahora mismo tenemos todos los paneles mezclados y sin ningún orden, para esto existen las filas o Rows en Grafana, las filas nos permiten aplicar filtros, y agrupar paneles en función de su propósito o finalidad, para ello iremos a `Add > Row` y creara un Row o Fila.
 
@@ -415,3 +415,81 @@ Ahora añadiremos más campos como  el Uptime, la RAM, los porcentajes de CPU, R
 Quedaría este panel visual tal que así:
 
 <img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/201.png" />
+
+### Organización
+
+Ahora que conocemos las filas o rows, vamos a organizar el panel por secciones, una dedicada a cada apartado importante, tendremos el panel principal creado en el apartado anterior, una sección para ver los datos más relevantes de la instancia actual, otra sección para datos menos relevantes y finalmente una sección para monitorear el estado de los servicios más importantes.
+
+#### Panel principal
+
+Ya lo hemos hecho en el apartado anterior
+
+#### Datos relevantes
+
+Utilizaremos paneles hechos anteriormente y crearemos algunos nuevos, empezaremos cambiando el formato de la RAM para hacerlo más visual y modificando la CPU con la opción de `fill opacity` para que sea más clara su visión.
+
+<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/202.png" />
+
+Controlaremos en esta sección también el tráfico de red, el I/O de los discos y la lectura/escritura de los discos.
+
+Todo esto ya lo hemos calculado anteriormente pero cambiaremos su formatos para hacerlos más visuales, modificaremos el Tráfico de red con la opción de `fill opacity` para que sea más clara su visión, la añadiremos también al I/O del disco y modificaremos la Lectura/Escritura del disco para que se muestre en paneles, dando el siguiente resultado.
+
+<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/203.png" />
+
+Y quedando está sección tal que así.
+
+<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/204.png" />
+
+#### Datos Instancia
+
+Para ver datos más específicos usaremos algunas de las antiguas querys y otras nuevas, reutilizaremos los paneles de `Uso de red`, `Estado de servicios` y `Uso de partición`, para ello modificaremos las querys para que obtengan los datos de cada `instance`:
+
+- Uso de red: 
+	Nueva query: 
+	- `max by (instance) (irate(windows_net_bytes_sent_total{instance=~"$instance",nic!~"(?i:(.*(isatap|VPN).*))"}[2m]))* 8`
+	- `-max by (instance) (irate(windows_net_bytes_received_total{instance=~"$instance",nic!~"(?i:(.*(isatap|VPN).*))"}[2m]))*8`
+- Estado de servicios:
+	Nueva query:
+	- `sum(windows_service_state{instance=~"$instance"}) by (state)`
+- Uso de partición:
+	Nueva query:
+	`100 - (windows_logical_disk_free_bytes{instance=~"$instance", volume=~".:"} / windows_logical_disk_size_bytes{instance=~"$instance", volume=~".:"}`
+
+En estas querys modificaremos la referencia a la variable `job` por la variable `instance`, también modificaremos la visualización del `estado de los servicios` por un panel de `stat` y modificaremos la visualización de `Uso de partición` por un panel en `gauge`.
+
+Añadiremos una visión del Uptime de la `instance`, con la query:
+`avg(time() - windows_system_system_up_time{instance=~"$instance"})`.
+
+Añadiremos también que nos muestre el nombre del dominio de la `instance` con las transformaciones que vimos en el panel principal y con la siguiente query:
+`windows_cs_hostname{instance=~"$instance"}`
+
+Quedando tal que así:
+
+<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/205.png" />
+
+Añadiremos más paneles para controlar el uso de la CPU, los estados de la memoria RAM, I/O de disco, y Lectura/escritura de disco
+
+- Uso de la CPU (formato `Gauge`):
+	Query: 
+	`100 - (avg(irate(windows_cpu_time_total{instance=~"$instance",mode="idle"}[2m])))*100`
+
+- Estados memoria RAM (formato `stat`):
+	Querys:
+	- `windows_os_virtual_memory_bytes{instance=~"$instance"}`
+	- `windows_cs_physical_memory_bytes{instance=~"$instance"}`
+	- `windows_os_physical_memory_free_bytes{instance=~"$instance"}`
+	- `windows_os_virtual_memory_free_bytes{instance=~"$instance"}`
+
+- I/O disco (formato `Time series`):
+	Querys:
+	- `irate(windows_logical_disk_reads_total{instance=~"$instance", volume=~".:"}[5m])`
+	- `irate(windows_logical_disk_writes_total{instance=~"$instance", volume=~".:"}[5m])`
+- 
+- Lectura/Escritura disco (formato `Time series`):
+	Querys:
+	- `irate(windows_logical_disk_read_bytes_total{instance=~"$instance", volume=~".:"}[5m])`
+	- `irate(windows_logical_disk_write_bytes_total{instance=~"$instance", volume=~".:"}[5m])`
+
+Tras estos cambios quedaría esta sección del dashboard tal que así:
+
+<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/206.png" />
