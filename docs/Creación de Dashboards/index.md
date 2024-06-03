@@ -5,10 +5,8 @@ nav_order: 4
 has_children: true
 has_toc: false
 ---
+# Creación de dashboards
 
-# Introducción
-
-## Creación de dashboards
 
 ### Contenido
 

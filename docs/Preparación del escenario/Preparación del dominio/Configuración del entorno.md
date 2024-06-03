@@ -124,17 +124,17 @@ Ahora empezaremos la creación de la aplicación de registro horario, la aplicac
 	Página donde se sanitizarán y validarán las credenciales introducidas por el usuario y será redirigido a la página de fichajes si las credenciales son validas, o será devuelto a la página de login en caso contrario.
 	
 	- Credenciales invalidas:
-	<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/127.png" />
+<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/127.png" />
 	- Credenciales válidas:
-	<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/128.png" />
+<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/128.png" />
 
 
 - **Página de fichajes**.
 	Página donde se realizará el fichaje de inicio y de fin de jornada.
 	- Antes de realizar fichaje:
-	<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/129.png" />
+<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/129.png" />
 	- Después de realizar fichaje:
-	<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/130.png" />
+<img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/130.png" />
 
 
 #### Código
