@@ -5,10 +5,10 @@ parent: Introducción
 nav_order: 4
 ---
 
-### Comparación con otras herramientas
+# Comparación con otras herramientas
 Esta consideración es muy subjetiva y depende de las necesidades de tu sistema, ya que hay entornos que no requieren que sea necesario una protección tan fuerte y otros que necesitan ser entornos más controlados. A continuación se van a mencionar algunos ejemplos y posibles ventajas que puede obtener la herramienta que estamos estudiando.
 
-### Alternativas con sus ventajas e inconvenientes:
+# Alternativas con sus ventajas e inconvenientes:
 
 **Visualización de datos:**
 

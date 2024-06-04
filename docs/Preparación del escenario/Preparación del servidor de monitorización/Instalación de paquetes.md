@@ -18,7 +18,7 @@ has_toc: true
 - TOC
 {:toc}
 </details>
-### Preparando la base
+# Preparando la base
 
 Partiendo de un SO `Debian 12` recién instalado lo primero que haremos será actualizar los repositorios y los paquetes que tengamos con el comando:
 
@@ -26,7 +26,7 @@ Partiendo de un SO `Debian 12` recién instalado lo primero que haremos será ac
 apt update && apt upgrade
 ```
 
-### Instalación de paquetes
+# Instalación de paquetes
 
 Con el SO ya actualizado instalaremos los paquetes necesarios para realizar las instalaciones con el comando:
 
@@ -42,7 +42,7 @@ La función de los paquetes instalados será la siguiente:
 - **openssh-server:** Permite que el servidor reciba conexiones de otros sistemas mediante SSH, este paquete será utilizado para la administración del servidor.
 - **apache2-utils:** Herramientas de línea de comandos para administrar Apache 2, este paquete será utilizado para la creación de contraseñas de autentificación más adelante.
 
-### Creación de usuarios
+# Creación de usuarios
 
 Debemos asignar un usuario para ejecutar los servicios de Grafana, de Prometheus y de Influxdb, por seguridad crearemos usuarios con el shell `/bin/false` para que no se pueda iniciar sesión con esos usuarios. Grafana e Influxdb ya lo crean automáticamente en la instalación, sólo será necesario crear el usuario de Prometheus, el comando será el siguiente:
 
@@ -50,7 +50,7 @@ Debemos asignar un usuario para ejecutar los servicios de Grafana, de Prometheus
 adduser --no-create-home --shell /bin/false prometheus
 ```
 
-### Instalación de Grafana
+# Instalación de Grafana
 
 Instalaremos Grafana mediante un script que ya he creado, lo descargaremos con el comando:
 
@@ -121,7 +121,7 @@ exit 0
 
 
 
-### Instalación de Influxdb
+# Instalación de Influxdb
 
 Siguiendo la documentación oficial de Influxdb primero descargaremos el servidor y luego la interfaz de la linea de comandos para interactuar con influxdb, los instalaremos con el comando:
 
@@ -138,7 +138,7 @@ mv influx /usr/local/bin/
 rm influxdb2-client-2.7.5-linux-amd64.tar.gz
 ```
 
-### Instalación de Prometheus
+# Instalación de Prometheus
 
 Instalaremos Prometheus mediante un script que ya he creado, lo descargaremos con el comando:
 

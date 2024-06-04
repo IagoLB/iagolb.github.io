@@ -20,10 +20,10 @@ has_toc: false
 {:toc}
 </details>
 
-### Creación de una aplicación para el control horario
+# Creación de una aplicación para el control horario
 
 
-#### Preparación
+## Preparación
 Vamos a crear una pequeña aplicación, para simular un entorno real de una Pyme, para el registro horario de los empleados usando una base de datos [MariaDB](https://mariadb.org/download/?t=mariadb&p=mariadb&r=11.3.2&os=windows&cpu=x86_64&pkg=msi&mirror=fe_up_pt) y [Php para IIS](https://windows.php.net/qa/), empezaremos instalando y configurando MariaDB.
 
 Iniciamos la instalación y eliminamos las opciones de instalación de las librerías `C/C++`, así como las herramientas de terceros.
@@ -111,7 +111,7 @@ Debería haberse añadido un registro CNAME apuntando a `DC-02`.
 
 <img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/125.png" />
 
-#### Creación
+## Creación
 
 Ahora empezaremos la creación de la aplicación de registro horario, la aplicación constará de 3 fases:
 
@@ -137,7 +137,7 @@ Ahora empezaremos la creación de la aplicación de registro horario, la aplicac
 <img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/130.png" />
 
 
-#### Código
+## Código
 
 - **Portal de inicio de sesión**
 	- html
@@ -385,9 +385,9 @@ Ahora empezaremos la creación de la aplicación de registro horario, la aplicac
 	?>
 	```
 
-### Creación del servicio de exportación de métricas
+# Creación del servicio de exportación de métricas
 
-#### Preparación de archivos
+## Preparación de archivos
 
 Para el servicio de exportación crearemos dos carpetas compartidas, una en cada DC del dominio con los archivos necesarios para la creación del servicio, de tal forma que siempre estén disponibles, la instalación se hará de forma automática mediante una GPO.
 
@@ -441,7 +441,7 @@ if (!$servicio) {  #sino existe el servicio lo crea
 
 <img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/133.png" />
 
-#### Creación de la GPO
+## Creación de la GPO
 
 Para la creación de la GPO para el despliegue automático en el dominio iremos al `Administrador del servidor > Herramientas > Administración de directivas de grupo`
 

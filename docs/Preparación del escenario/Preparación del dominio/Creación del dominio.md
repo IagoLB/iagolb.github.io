@@ -19,7 +19,7 @@ has_toc: false
 {:toc}
 </details>
 
-### Preparando la base
+# Preparando la base
 
 La creación del dominio se hará con la siguiente configuración:
 
@@ -32,7 +32,7 @@ El controlador secundario del dominio replica la base de datos del Active Direct
 - **Clientes** `Windows 10 PRO`:
 Los clientes son dispositivos que se conectan al dominio para acceder a recursos de red, aplicar políticas de grupo, y utilizar servicios DNS y DHCP proporcionados por los controladores de dominio.
 
-### Creación del dominio
+# Creación del dominio
 
 Inicializamos el controlador principal del dominio, de ahora en adelante `DC-01`, para crear el dominio abrimos la `Administración del servidor`, pulsamos en `Administrar` y en `Agregar Roles y características` y se nos abrirá la siguiente ventana, donde elegiremos la opción de: `Instalación basada en características o en roles`.
 
@@ -137,7 +137,7 @@ Tras finalizar la instalación se reiniciará automáticamente y si todo ha ido 
 
 <img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/39.png" />
 
-### Creación del segundo controlador del dominio
+# Creación del segundo controlador del dominio
 
 Para tener un servicio resiliente y con tolerancia a fallos crearemos un segundo controlador de dominio que se encargará de proporcionar redundancia, escalabilidad y mejoras en el rendimiento para la gestión de usuarios, grupos..., etc, al dividir la carga entre dos servidores.
 
@@ -217,7 +217,7 @@ Tras finalizar la instalación el servidor se reiniciará, si todo ha ido correc
 
 <img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/54.png" />
 
-### Servicio DHCP
+# Servicio DHCP
 
 El servicio DHCP será instalado en `DC-01` con conmutación por error en `DC-02`.
 
@@ -329,7 +329,7 @@ Veremos en el servidor secundario como nos aparecio el ámbito tras realizar la 
 
 <img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/80.png" />
 
-### Servicio DNS
+# Servicio DNS
 
 El servicio DNS será instalado en `DC-01` con `DC-02` como servidor secundario.
 
@@ -423,7 +423,7 @@ Vamos a la pestaña de reenviadores y ponemos, por ejemplo, los servidores de go
 <img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/103.png" />
 
 
-### Servicio IIS
+# Servicio IIS
 
 El servicio IIS será instalado exclusivamente en `DC-02`.
 

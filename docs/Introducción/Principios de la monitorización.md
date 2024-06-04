@@ -4,11 +4,11 @@ title: ¿Qué es la monitorización?
 parent: Introducción
 nav_order: 2
 ---
-## Qué es la monitorización
+# Qué es la monitorización
 
 La monitorización de sistemas informáticos, consiste en el proceso de recopilar, analizar y visualizar datos sobre el estado y rendimiento de un sistema informático. Este proceso se lleva a cabo de forma continua y permite a los administradores de sistemas detectar y prevenir problemas, optimizar el rendimiento y garantizar la disponibilidad de los sistemas.
 
-## ¿Cómo se realiza la monitorización?
+# ¿Cómo se realiza la monitorización?
 
 Existen diferentes herramientas y tecnologías disponibles para la monitorización de sistemas informáticos. Algunas de las más comunes incluyen:
 

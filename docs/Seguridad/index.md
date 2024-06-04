@@ -14,4 +14,7 @@ has_toc: false
 
 - [Seguridad de los servicios](https://iagolb.github.io/docs/Seguridad/Seguridad%20de%20los%20servicios)
 
+- [Seguridad de los datos](https://iagolb.github.io/docs/Seguridad/Seguridad%20de%20los%20datos)
+
+
 - [Seguridad del servidor](https://iagolb.github.io/docs/Seguridad/Seguridad%20del%20servidor)

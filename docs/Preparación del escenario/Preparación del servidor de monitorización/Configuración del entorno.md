@@ -18,12 +18,12 @@ has_toc: false
 - TOC
 {:toc}
 </details>
-### Configuración de los paquetes
+# Configuración de los paquetes
 
 Ya hemos instalado todo lo necesario para desplegar el servidor de monitorización, ahora vamos empezar a configurar los servicios y a conectarlos entre si, empezando con 
 Prometheus, seguiremos con Influxdb y finalizando con Grafana.
 
-### Prometheus
+# Prometheus
 
 Prometheus obtiene sus objetivos del fichero `Prometheus.yml`, ubicado en la ruta `/etc/prometheus`. Durante la instalación hemos creado una pequeña configuración como esqueleto, la comentaré ahora:
 
@@ -73,7 +73,7 @@ Con esta configuración Prometheus recogerá automaticamente las métricas que s
 <img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/02.png" />
 
 
-### Influxdb
+# Influxdb
 
 Influxdb puede configurarse tanto por linea de comandos con `influx` como por vía web en el puerto 8086, la primera configuración será más cómoda por vía web, es por donde lo haremos en este tutorial.
 
@@ -119,7 +119,7 @@ en este caso el tamaño de las respuestas http de prometheus
 ```
 
 
-### Grafana
+# Grafana
 
 Grafana se configura en su mayoría por vía web, aunque podemos modificar su configuración en el fichero `/etc/grafana/grafana.ini`, hay configuraciones interesantes que veremos más adelante, en el fichero podemos modificar opciones como el protocolo que usará por defecto, si usará certificados para mejorar su seguridad, la IP en la que se expondrá el servicio y/o su puerto, así como las credenciales por defecto que usaremos la primera vez, así como la configuración de smtp para enviar alertar, lo cual veremos más adelante.
 
@@ -161,7 +161,7 @@ Finalmente pulsamos en `Save and test` y si el resultado es correcto nos saldrá
 
 <img src="https://raw.githubusercontent.com/IagoLB/iagolb.github.io/main/images/19.png" />
 
-### Testdata
+# Testdata
 
 Como aún no hemos configurado el Active Directory vamos a utilizar un plugin llamado Testdata que generara datos para hacer un panel de pruebas.
 
